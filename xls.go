@@ -3,6 +3,7 @@ package xls
 import (
 	"io"
 	"os"
+	"fmt"
 
 	"github.com/neuden/ole2"
 )
@@ -29,6 +30,8 @@ func OpenWithCloser(file string, charset string) (*WorkBook, io.Closer, error) {
 //Open xls file from reader
 func OpenReader(reader io.ReadSeeker, charset string) (wb *WorkBook, err error) {
 	var ole *ole2.Ole
+	fmt.Println("Open reader")
+
 	if ole, err = ole2.Open(reader, charset); err == nil {
 		var dir []*ole2.File
 		if dir, err = ole.ListDir(); err == nil {
